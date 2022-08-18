@@ -1,5 +1,6 @@
 package com.algaworks;
 
+import com.algaworks.desconto.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,15 @@ public class PedidoTest {
 
     @Before
     public void setUp() throws Exception {
-        pedido = new Pedido();
+        CalculadoraFaixaDesconto calculadoraDesconto =
+                new CalculadoraDescontoTerceiraFaixa(
+                        new CalculadoraDescontoSegundaFaixa(
+                                new CalculadoraDescontoPrimeiraFaixa(
+                                        new SemDesconto(null)
+                                )
+                        )
+                );
+        pedido = new Pedido(calculadoraDesconto);
     }
 
     @Test

@@ -1,10 +1,17 @@
 package com.algaworks;
 
+import com.algaworks.desconto.CalculadoraFaixaDesconto;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
     private List<ItemPedido> itens = new ArrayList<>();
+    private final CalculadoraFaixaDesconto calculadoraDesconto;
+
+    public Pedido(CalculadoraFaixaDesconto calculadoraDesconto) {
+        this.calculadoraDesconto = calculadoraDesconto;
+    }
 
     public void adicionarItem(ItemPedido itemPedido) {
         itens.add(itemPedido);
@@ -12,15 +19,7 @@ public class Pedido {
 
     public ResumoPedido resumo(){
         double valorTotal = itens.stream().mapToDouble(i -> i.quantidade() * i.valorUnitario()).sum();
-        double desconto = 0;
-
-        if (valorTotal > 300.00 && valorTotal <= 800.00) {
-            desconto = valorTotal * 0.04;
-        } else if (valorTotal > 800.00 && valorTotal <= 1000.00) {
-            desconto = valorTotal * 0.06;
-        } else if (valorTotal > 1000.00) {
-            desconto = valorTotal * 0.08;
-        }
+        double desconto = calculadoraDesconto.desconto(valorTotal);
 
         return new ResumoPedido(valorTotal, desconto);
     }
