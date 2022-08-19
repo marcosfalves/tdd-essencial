@@ -1,6 +1,7 @@
 package com.algaworks;
 
 import com.algaworks.desconto.*;
+import com.algaworks.exception.QuantidadeItemNegativaException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -61,5 +62,10 @@ public class PedidoTest {
     private void assertResumoPedido(double valorTotal, double desconto) {
         ResumoPedido resumoPedido = pedido.construir().resumo();
         assertEquals(new ResumoPedido(valorTotal, desconto), resumoPedido);
+    }
+
+    @Test(expected = QuantidadeItemNegativaException.class)
+    public void naoPermitirCriarItensComQuantidadeNegativa() {
+        pedido.comItem(0.0, -10);
     }
 }

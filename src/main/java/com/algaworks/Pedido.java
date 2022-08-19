@@ -1,6 +1,7 @@
 package com.algaworks;
 
 import com.algaworks.desconto.CalculadoraFaixaDesconto;
+import com.algaworks.exception.QuantidadeItemNegativaException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,13 @@ public class Pedido {
     }
 
     public void adicionarItem(ItemPedido itemPedido) {
+        validarItemPedido(itemPedido);
         itens.add(itemPedido);
+    }
+
+    private void validarItemPedido(ItemPedido itemPedido) {
+        if (itemPedido.quantidade() < 0)
+                throw new QuantidadeItemNegativaException();
     }
 
     public ResumoPedido resumo(){
