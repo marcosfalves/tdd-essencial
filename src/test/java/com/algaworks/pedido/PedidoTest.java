@@ -1,6 +1,5 @@
 package com.algaworks.pedido;
 
-import com.algaworks.desconto.*;
 import com.algaworks.pedido.exception.QuantidadeItemNegativaException;
 import org.junit.Before;
 import org.junit.Test;

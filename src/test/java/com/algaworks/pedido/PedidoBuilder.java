@@ -1,6 +1,5 @@
 package com.algaworks.pedido;
 
-import com.algaworks.desconto.*;
 import com.algaworks.pedido.desconto.*;
 
 public class PedidoBuilder {
