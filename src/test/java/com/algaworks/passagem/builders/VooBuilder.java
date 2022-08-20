@@ -1,4 +1,4 @@
-package com.algaworks.builders;
+package com.algaworks.passagem.builders;
 
 import com.algaworks.passagem.model.Voo;
 

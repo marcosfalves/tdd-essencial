@@ -1,8 +1,6 @@
 package com.algaworks.passagem.service;
 
-import com.algaworks.builders.VooBuilder;
-import com.algaworks.passagem.model.Passageiro;
-import com.algaworks.passagem.model.TipoPassageiro;
+import com.algaworks.passagem.builders.VooBuilder;
 import com.algaworks.passagem.model.Voo;
 import org.junit.Before;
 import org.junit.Test;
