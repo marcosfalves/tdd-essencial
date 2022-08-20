@@ -7,12 +7,15 @@ public class Pedido {
     private Cliente cliente;
     private double valor;
 
+    private StatusPedido statusPedido;
+
     public Pedido() {
     }
 
-    public Pedido(Cliente cliente, double valor) {
+    public Pedido(Cliente cliente, double valor, StatusPedido statusPedido) {
         this.cliente = cliente;
         this.valor = valor;
+        this.statusPedido = statusPedido;
     }
 
     public Cliente getCliente() {
@@ -31,17 +34,25 @@ public class Pedido {
         this.valor = valor;
     }
 
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
+    }
+
+    public void setStatusPedido(StatusPedido statusPedido) {
+        this.statusPedido = statusPedido;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pedido pedido = (Pedido) o;
-        return Double.compare(pedido.valor, valor) == 0 && cliente.equals(pedido.cliente);
+        return Double.compare(pedido.valor, valor) == 0 && cliente.equals(pedido.cliente) && statusPedido == pedido.statusPedido;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cliente, valor);
+        return Objects.hash(cliente, valor, statusPedido);
     }
 
     @Override
@@ -49,6 +60,7 @@ public class Pedido {
         return "Pedido{" +
                 "cliente=" + cliente +
                 ", valor=" + valor +
+                ", statusPedido=" + statusPedido +
                 '}';
     }
 }
