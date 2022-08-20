@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class PedidoServiceTest {
@@ -30,7 +32,7 @@ public class PedidoServiceTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        pedidoService = new PedidoService(pedidos, notificadorEmail, notificadorSms);
+        pedidoService = new PedidoService(List.of(pedidos, notificadorEmail, notificadorSms));
 
         pedido = new PedidoBuilder()
                 .comValor(100.00)
@@ -47,18 +49,18 @@ public class PedidoServiceTest {
     @Test
     public void deveSalvarPedidoNoBancoDeDados() {
         pedidoService.lancar(pedido);
-        Mockito.verify(pedidos).guardar(pedido);
+        Mockito.verify(pedidos).executar(pedido);
     }
 
     @Test
     public void deveNotificarPorEmail() {
         pedidoService.lancar(pedido);
-        Mockito.verify(notificadorEmail).enviar(pedido);
+        Mockito.verify(notificadorEmail).executar(pedido);
     }
 
     @Test
     public void deveNotificarPorSms() {
         pedidoService.lancar(pedido);
-        Mockito.verify(notificadorSms).notificar(pedido);
+        Mockito.verify(notificadorSms).executar(pedido);
     }
 }

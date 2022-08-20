@@ -5,24 +5,19 @@ import com.algaworks.pedidomock.notificacao.NotificadorEmail;
 import com.algaworks.pedidomock.notificacao.NotificadorSms;
 import com.algaworks.pedidomock.repository.Pedidos;
 
+import java.util.List;
+
 public class PedidoService {
+    private List<AcaoLancamentoPedido> acoes;
 
-    private Pedidos pedidos;
-    private NotificadorEmail notificadorEmail;
-    private NotificadorSms notificadorSms;
-
-    public PedidoService(Pedidos pedidos, NotificadorEmail notificadorEmail, NotificadorSms notificadorSms) {
-        this.pedidos = pedidos;
-        this.notificadorEmail = notificadorEmail;
-        this.notificadorSms = notificadorSms;
+    public PedidoService(List<AcaoLancamentoPedido> acoes) {
+        this.acoes = acoes;
     }
 
     public double lancar(Pedido pedido) {
         double imposto =  pedido.getValor() * 0.1;
 
-        pedidos.guardar(pedido);
-        notificadorEmail.enviar(pedido);
-        notificadorSms.notificar(pedido);
+        acoes.forEach(acao -> acao.executar(pedido));
 
         return imposto;
     }
