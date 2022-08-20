@@ -1,7 +1,7 @@
-package com.algaworks;
+package com.algaworks.pedido;
 
-import com.algaworks.desconto.CalculadoraFaixaDesconto;
-import com.algaworks.exception.QuantidadeItemNegativaException;
+import com.algaworks.pedido.desconto.CalculadoraFaixaDesconto;
+import com.algaworks.pedido.exception.QuantidadeItemNegativaException;
 
 import java.util.ArrayList;
 import java.util.List;
